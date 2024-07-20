@@ -5,33 +5,35 @@
 //
 // Execute `rustlings hint if2` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
+
 
 pub fn foo_if_fizz(fizzish: &str) -> &str {
     if fizzish == "fizz" {
         "foo"
+    } else if fizzish == "fuzz" {
+        "bar" // 根据测试要求，当 fizzish 等于 "fuzz" 时返回 "bar"
     } else {
-        1
+        "baz" // 作为默认返回值
     }
 }
 
-// No test changes needed!
+// 测试模块保持不变
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn foo_for_fizz() {
-        assert_eq!(foo_if_fizz("fizz"), "foo")
+        assert_eq!(foo_if_fizz("fizz"), "foo");
     }
 
     #[test]
     fn bar_for_fuzz() {
-        assert_eq!(foo_if_fizz("fuzz"), "bar")
+        assert_eq!(foo_if_fizz("fuzz"), "bar");
     }
 
     #[test]
     fn default_to_baz() {
-        assert_eq!(foo_if_fizz("literally anything"), "baz")
+        assert_eq!(foo_if_fizz("literally anything"), "baz");
     }
 }

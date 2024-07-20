@@ -9,11 +9,11 @@
 // Execute `rustlings hint errors6` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 use std::num::ParseIntError;
 
-// This is a custom error type that we will be using in `parse_pos_nonzero()`.
+// 自定义错误类型，可以描述创建错误或解析错误
 #[derive(PartialEq, Debug)]
 enum ParsePosNonzeroError {
     Creation(CreationError),
@@ -21,22 +21,24 @@ enum ParsePosNonzeroError {
 }
 
 impl ParsePosNonzeroError {
+    // 从 CreationError 转换错误
     fn from_creation(err: CreationError) -> ParsePosNonzeroError {
         ParsePosNonzeroError::Creation(err)
     }
-    // TODO: add another error conversion function here.
-    // fn from_parseint...
+    
+    // 从 ParseIntError 转换错误
+    fn from_parse_int_error(err: ParseIntError) -> ParsePosNonzeroError {
+        ParsePosNonzeroError::ParseInt(err)
+    }
 }
 
+// 解析字符串并尝试创建 PositiveNonzeroInteger
 fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
-    // TODO: change this to return an appropriate error instead of panicking
-    // when `parse()` returns an error.
-    let x: i64 = s.parse().unwrap();
+    let x: i64 = s.parse().map_err(ParsePosNonzeroError::from_parse_int_error)?;
     PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation)
 }
 
-// Don't change anything below this line.
-
+// PositiveNonzeroInteger 结构体和相关实现
 #[derive(PartialEq, Debug)]
 struct PositiveNonzeroInteger(u64);
 
@@ -56,13 +58,13 @@ impl PositiveNonzeroInteger {
     }
 }
 
+// 测试模块
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_parse_error() {
-        // We can't construct a ParseIntError, so we have to pattern match.
         assert!(matches!(
             parse_pos_nonzero("not a number"),
             Err(ParsePosNonzeroError::ParseInt(_))

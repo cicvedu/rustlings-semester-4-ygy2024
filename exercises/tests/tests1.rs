@@ -10,12 +10,20 @@
 // Execute `rustlings hint tests1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 #[cfg(test)]
 mod tests {
     #[test]
     fn you_can_assert() {
-        assert!();
+        // 要使测试编译，我们需要给 assert! 提供一个布尔表达式。
+        // 要使测试通过，这个表达式需要是 true。
+        // 要使测试失败，这个表达式需要是 false。
+
+        // 使测试通过的例子
+        assert!(true);
+
+        // 使测试失败的例子（注释掉上面的测试，取消注释下面的测试）
+        // assert!(false);
     }
 }

@@ -7,12 +7,11 @@
 // Execute `rustlings hint move_semantics4` or use the `hint` watch subcommand
 // for a hint.
 
-// I AM NOT DONE
+
 
 fn main() {
-    let vec0 = Vec::new();
-
-    let mut vec1 = fill_vec(vec0);
+    // 这里不需要使用vec0，因为fill_vec现在会在内部创建Vec
+    let mut vec1 = fill_vec();
 
     println!("{} has length {} content `{:?}`", "vec1", vec1.len(), vec1);
 
@@ -21,13 +20,13 @@ fn main() {
     println!("{} has length {} content `{:?}`", "vec1", vec1.len(), vec1);
 }
 
-// `fill_vec()` no longer takes `vec: Vec<i32>` as argument
+// 修改fill_vec函数，使其不再接收参数，而是在内部创建并返回Vec<i32>
 fn fill_vec() -> Vec<i32> {
-    let mut vec = vec;
+    let mut vec = Vec::new(); // 创建一个新的Vec<i32>
 
     vec.push(22);
     vec.push(44);
     vec.push(66);
 
-    vec
+    vec // 返回创建的Vec
 }

@@ -9,16 +9,13 @@ fn main() {
     let timestamp = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
-        .as_secs(); // What's the use of this timestamp here?
-    let your_command = format!(
-        "Your command here with {}, please checkout exercises/tests/build.rs",
-        timestamp
-    );
-    println!("cargo:{}", your_command);
+        .as_secs();
+    // 这里使用timestamp作为环境变量TEST_FOO的值
+    println!("cargo:rustc-env=TEST_FOO={}", timestamp);
 
     // In tests8, we should enable "pass" feature to make the
     // testcase return early. Fill in the command to tell
     // Cargo about that.
-    let your_command = "Your command here, please checkout exercises/tests/build.rs";
-    println!("cargo:{}", your_command);
+    // 这里启用"pass"特性
+    println!("cargo:rustc-cfg=feature=\"pass\"");
 }

@@ -2,16 +2,19 @@
 //
 // No hints this time! ;)
 
-// I AM NOT DONE
+
 
 #[derive(Debug)]
 enum Message {
-    // TODO: define a few types of messages as used below
+    Quit,
+    Echo,
+    Move { x: i32, y: i32 },
+    ChangeColor { r: u8, g: u8, b: u8 },
 }
 
 fn main() {
     println!("{:?}", Message::Quit);
     println!("{:?}", Message::Echo);
-    println!("{:?}", Message::Move);
-    println!("{:?}", Message::ChangeColor);
+    println!("{:?}", Message::Move { x: 10, y: 20 });
+    println!("{:?}", Message::ChangeColor { r: 255, g: 100, b: 50 });
 }

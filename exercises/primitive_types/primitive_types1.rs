@@ -6,7 +6,7 @@
 // Execute `rustlings hint primitive_types1` or use the `hint` watch subcommand
 // for a hint.
 
-// I AM NOT DONE
+
 
 fn main() {
     // Booleans (`bool`)
@@ -16,7 +16,7 @@ fn main() {
         println!("Good morning!");
     }
 
-    let // Finish the rest of this line like the example! Or make it be false!
+    let is_evening = false; // 这里可以根据实际情况设置为true或false
     if is_evening {
         println!("Good evening!");
     }

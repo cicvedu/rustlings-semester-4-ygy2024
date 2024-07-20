@@ -3,7 +3,7 @@
 // Execute `rustlings hint modules1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 mod sausage_factory {
     // Don't let anybody outside of this module see this!
@@ -11,12 +11,13 @@ mod sausage_factory {
         String::from("Ginger")
     }
 
-    fn make_sausage() {
+    // 将 make_sausage 函数标记为公开的
+    pub fn make_sausage() {
         get_secret_recipe();
         println!("sausage!");
     }
 }
 
 fn main() {
-    sausage_factory::make_sausage();
+    sausage_factory::make_sausage(); // 现在可以正常调用
 }

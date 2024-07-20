@@ -7,22 +7,23 @@
 // Execute `rustlings hint modules2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+
 
 mod delicious_snacks {
-    // TODO: Fix these use statements
-    use self::fruits::PEAR as ???
-    use self::veggies::CUCUMBER as ???
-
-    mod fruits {
+    // 确保 PEAR 和 CUCUMBER 常量在它们各自的模块中是公开的
+    pub mod fruits {
         pub const PEAR: &'static str = "Pear";
         pub const APPLE: &'static str = "Apple";
     }
 
-    mod veggies {
+    pub mod veggies {
         pub const CUCUMBER: &'static str = "Cucumber";
         pub const CARROT: &'static str = "Carrot";
     }
+
+    // 使用 pub use 来重新导出这些常量
+    pub use self::fruits::PEAR as fruit;
+    pub use self::veggies::CUCUMBER as veggie;
 }
 
 fn main() {
