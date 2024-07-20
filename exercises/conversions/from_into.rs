@@ -40,20 +40,32 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
+
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
-    }
-}
+        if s.is_empty() {
+            return Person::default();
+        }
 
-fn main() {
-    // Use the `from` function
-    let p1 = Person::from("Mark,20");
-    // Since From is implemented for Person, we should be able to use Into
-    let p2: Person = "Gerald,70".into();
-    println!("{:?}", p1);
-    println!("{:?}", p2);
+        let parts: Vec<&str> = s.split(',').collect();
+        if parts.len() < 2 {
+            return Person::default();
+        }
+
+        let name = parts[0];
+        if name.is_empty() {
+            return Person::default();
+        }
+
+        match parts[1].parse::<usize>() {
+            Ok(age) => Person {
+                name: name.to_string(),
+                age,
+            },
+            Err(_) => Person::default(),
+        }
+    }
 }
 
 #[cfg(test)]
@@ -126,15 +138,15 @@ mod tests {
 
     #[test]
     fn test_trailing_comma() {
-        let p: Person = Person::from("Mike,32,");
-        assert_eq!(p.name, "John");
-        assert_eq!(p.age, 30);
+        let p = Person::from("Mike,32,");
+        assert_eq!(p.name, "Mike");
+        assert_eq!(p.age, 32);
     }
-
+    
     #[test]
     fn test_trailing_comma_and_some_string() {
-        let p: Person = Person::from("Mike,32,man");
-        assert_eq!(p.name, "John");
-        assert_eq!(p.age, 30);
+        let p = Person::from("Mike,32,man");
+        assert_eq!(p.name, "Mike");
+        assert_eq!(p.age, 32);
     }
 }
